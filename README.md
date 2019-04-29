@@ -9,15 +9,19 @@ JLRoutes
 
 ### What is it? ###
 JLRoutes is a URL routing library with a simple block-based API. It is designed to make it very easy to handle complex URL schemes in your application with minimal code.
+JLRoutes是一个URL路由库，具有一个简单的基于block的API。它的设计目的是用最少的代码非常容易地处理应用程序中的复杂URL模式。
 
 ### Installation ###
 JLRoutes is available for installation using [CocoaPods](https://cocoapods.org/pods/JLRoutes) or Carthage (add `github "joeldev/JLRoutes"` to your `Cartfile`).
+JLRoutes可以使用CocoaPods或Carthage进行安装(将github“joeldev/JLRoutes”添加到您的Cartfile中)。
 
 ### Requirements ###
 JLRoutes 2.x require iOS 8.0+ or macOS 10.10+. If you need to support iOS 7 or macOS 10.9, please use version 1.6.4 (which is the last 1.x release).
+JLRoutes 2。x要求iOS 8.0+或macOS 10.10+。如果您需要支持iOS 7或macOS 10.9，请使用版本1.6.4(即最后一个版本1)。x版本)。
 
 ### Documentation ###
 Documentation is available [here](http://cocoadocs.org/docsets/JLRoutes/).
+文档在这里(http://cocoadocs.org/docsets/JLRoutes/)。
 
 ### Getting Started ###
 
@@ -61,6 +65,7 @@ NSURL *viewUserURL = [NSURL URLWithString:@"myapp://user/view/joeldev"];
 ### The Parameters Dictionary ###
 
 The parameters dictionary always contains at least the following three keys:
+参数字典总是至少包含以下三个键:
 ```json
 {
   "JLRouteURL":  "(the NSURL that caused this block to be fired)",
@@ -70,18 +75,23 @@ The parameters dictionary always contains at least the following three keys:
 ```
 
 The JLRouteScheme key refers to the scheme that the matched route lives in. [Read more about schemes.](https://github.com/joeldev/JLRoutes#scheme-namespaces)
+JLRouteScheme键指的是匹配路由所在的方案。(https://github.com/joeldev/JLRoutes# schema -namespaces)
 
 See JLRoutes.h for the list of constants.
+有关常量列表，请参见jlrouting .h。
 
 ### Handler Block Chaining ###
 
 The handler block is expected to return a boolean for if it has handled the route or not. If the block returns `NO`, JLRoutes will behave as if that route is not a match and it will continue looking for a match. A route is considered to be a match if the pattern string matches **and** the block returns `YES`.
+block将返回一个布尔值，用于是否处理了路由。如果块返回“NO”，JLRoutes将表现为路由不匹配，并且它将继续寻找匹配。如果模式字符串匹配**，并且**块返回“YES”，则认为路由是匹配的。
 
 It is also important to note that if you pass nil for the handler block, an internal handler block will be created that simply returns `YES`.
+同理，如果为block传递nil，那么将创建一个只返回“YES”的block。
 
 ### Global Configuration ###
 
 There are multiple global configuration options available to help customize JLRoutes behavior for a particular use-case. All options only take affect for the next operation.
+有多个全局配置选项可用来帮助定制特定用例的JLRoutes行为。所有选项只对下一个操作生效。
 
 ```objc
 /// Configures verbose logging. Defaults to NO.
@@ -98,6 +108,7 @@ There are multiple global configuration options available to help customize JLRo
 ```
 
 These are all configured at the `JLRoutes` class level:
+这是JLRoutes所有的类级别的配置
 ```objc
 [JLRoutes setAlwaysTreatsHostAsPathComponent:YES];
 ```
@@ -115,6 +126,7 @@ These are all configured at the `JLRoutes` class level:
 ```
 
 This route would match things like `/user/view/joeldev` or `/post/edit/123`. Let's say you called `/post/edit/123` with some URL params as well:
+这条路由将匹配“/user/view/joeldev”或“/post/edit/123”之类的内容。假设你用一些URL参数调用了' /post/edit/123 ':
 
 ```objc
 NSURL *editPost = [NSURL URLWithString:@"myapp://post/edit/123?debug=true&foo=bar"];
@@ -122,6 +134,7 @@ NSURL *editPost = [NSURL URLWithString:@"myapp://post/edit/123?debug=true&foo=ba
 ```
 
 The parameters dictionary that the handler block receives would contain the following key/value pairs:
+block接收的参数字典将包含以下键/值对:
 ```json
 {
   "object": "post",
@@ -138,6 +151,7 @@ The parameters dictionary that the handler block receives would contain the foll
 ### Schemes ###
 
 JLRoutes supports setting up routes within a specific URL scheme. Routes that are set up within a scheme can only be matched by URLs that use a matching URL scheme. By default, all routes go into the global scheme.
+
 
 ```objc
 [[JLRoutes globalRoutes] addRoute:@"/foo" handler:^BOOL(NSDictionary *parameters) {
